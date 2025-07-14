@@ -16,7 +16,7 @@ model_refurb = pickle.load(open(os.path.join(MODEL_DIR, "model_refurb.pkl"), "rb
 model_resale = pickle.load(open(os.path.join(MODEL_DIR, "model_resale.pkl"), "rb"))
 model_decision = pickle.load(open(os.path.join(MODEL_DIR, "model_decision.pkl"), "rb"))
 
-# decision_mapping = pickle.load(open(os.path.join(MODEL_DIR, "decision_mapping.pkl"), "rb"))
+
 decision_mapping = {
     0: "Refurbish",
     1: "Liquidate",
