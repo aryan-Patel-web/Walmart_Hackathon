@@ -1,0 +1,13 @@
+numpy
+pandas 
+scikit-learn 
+lightgbm 
+matplotlib
+
+streamlit
+flask
+# pickle
+lightgbm 
+groq
+
+

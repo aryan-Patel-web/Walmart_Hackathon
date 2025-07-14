@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROC Model Test</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f6f6f6;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      font-weight: bold;
+      margin-top: 15px;
+      display: block;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    button {
+      background: #0071ce;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #005bb5;
+    }
+    .result {
+      margin-top: 20px;
+      background: #f0f0f0;
+      padding: 15px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Test ROC Model</h2>
+    <form id="predictForm">
+
+      <label>Category</label>
+      <select name="category" required>
+        <option value="0">Electronics (0)</option>
+        <option value="1">Beauty (1)</option>
+        <option value="2">Kitchen (2)</option>
+        <option value="3">Apparel (3)</option>
+      </select>
+
+      <label>Original Price</label>
+      <input type="number" name="original_price" value="12000" required />
+
+      <label>Condition Grade</label>
+      <select name="condition_grade" required>
+        <option value="0">A (0)</option>
+        <option value="1">B (1)</option>
+        <option value="2">C (2)</option>
+        <option value="3">D (3)</option>
+      </select>
+
+      <label>Return Reason Code</label>
+      <select name="return_reason_code" required>
+        <option value="0">Broken Item Received (0)</option>
+        <option value="1">Size Issue (1)</option>
+        <option value="2">Price Decreased (2)</option>
+        <option value="3">Missing Items From Box (3)</option>
+      </select>
+
+      <label>Inbound Shipping Cost</label>
+      <input type="number" name="inbound_shipping_cost" value="100" required />
+
+      <label>Hazardous Goods Flag</label>
+      <select name="hazardous_goods_flag" required>
+        <option value="0">No (0)</option>
+        <option value="1">Yes (1)</option>
+      </select>
+
+      <label>CO₂ Saved vs Landfill</label>
+      <input type="number" step="0.1" name="co2_saved_refurb_vs_landfill" value="3.5" required />
+
+      <button type="submit">Predict</button>
+    </form>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    document.getElementById('predictForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+      const payload = {};
+
+      for (const [key, value] of formData.entries()) {
+        payload[key] = Number(value);
+      }
+
+      document.getElementById("result").textContent = "Predicting...";
+
+      try {
+        const res = await fetch("/predict", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const json = await res.json();
+
+        if (json.error) {
+          document.getElementById("result").textContent = `Error: ${json.error}`;
+        } else {
+          const pretty = `
+Predicted Refurb Cost: ₹${json.predicted_refurb_cost}
+Predicted Resale Value: ₹${json.predicted_resale_value}
+Refurb Ratio: ${json.refurb_ratio}
+Resale Ratio: ${json.resale_ratio}
+Profit: ₹${json.profit}
+Recommended Decision: ${json.recommended_decision}
+          `.trim();
+          document.getElementById("result").textContent = pretty;
+        }
+      } catch (error) {
+        document.getElementById("result").textContent = "Error occurred. Please try again.";
+      }
+    });
+  </script>
+</body>
+</html>

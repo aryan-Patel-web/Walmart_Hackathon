@@ -1,0 +1,1350 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walmart Returns - Optimize Your Return</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .header {
+            background: #0071ce;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1, h2 {
+            color: #0071ce;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-card {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            background: #fafafa;
+        }
+
+        .product-image {
+            width: 120px;
+            height: 120px;
+            background: #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-details {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #0071ce;
+        }
+
+        .btn {
+            background: #0071ce;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+
+        .btn:hover {
+            background: #005bb5;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #666;
+        }
+
+        .btn-secondary:hover {
+            background: #555;
+        }
+
+        .btn-success {
+            background: #28a745;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .reason-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .reason-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .reason-card:hover {
+            border-color: #0071ce;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,113,206,0.1);
+        }
+
+        .reason-card.selected {
+            border-color: #0071ce;
+            background: #f0f8ff;
+        }
+
+        .reason-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            resize: vertical;
+            font-family: inherit;
+            margin: 1rem 0;
+        }
+
+        .refund-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .refund-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .refund-card:hover {
+            border-color: #0071ce;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,113,206,0.15);
+        }
+
+        .refund-card.selected {
+            border-color: #0071ce;
+            background: linear-gradient(135deg, #f0f8ff, #e6f2ff);
+        }
+
+        .refund-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #0071ce;
+        }
+
+        .success-animation {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #28a745;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounce 0.6s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .progress-step::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: #e0e0e0;
+            z-index: -1;
+        }
+
+        .progress-step:last-child::after {
+            display: none;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-circle.active {
+            background: #0071ce;
+            color: white;
+        }
+
+        .step-circle.completed {
+            background: #28a745;
+            color: white;
+        }
+
+        .step-label {
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .savings-alert {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            .product-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .refund-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Walmart</div>
+        <div>Returns & Refunds</div>
+    </div>
+
+    <div class="container">
+
+
+    - Progress Bar 
+        <div class="progress-bar">
+            <div class="progress-step">
+                <div class="step-circle active" id="step1">1</div>
+                <div class="step-label">Select Item</div>
+            </div>
+            <div class="progress-step">
+                <div class="step-circle" id="step2">2</div>
+                <div class="step-label">Return Reason</div>
+            </div>
+            <div class="progress-step">
+                <div class="step-circle" id="step3">3</div>
+                <div class="step-label">Choose Option</div>
+            </div>
+            <div class="progress-step">
+                <div class="step-circle" id="step4">4</div>
+                <div class="step-label">Confirmation</div>
+            </div>
+        </div>
+
+
+
+    - Page 1: Return Items
+        <div class="page active" id="page1">
+            <h1>Return Items</h1>
+            <p>Select the items you'd like to return from your recent orders:</p>
+
+            <div class="product-card">
+                <div class="product-image">Product Image</div>
+                <div class="product-info">
+                    <div class="product-title">Apple iPhone 15 Pro - 128GB Natural Titanium</div>
+                    <div class="product-details">
+                        Order #: WM-2024-789123<br>
+                        Purchased: March 15, 2024<br>
+                        Quantity: 1
+                    </div>
+                    <div class="price">$999.00</div>
+                </div>
+                <div>
+                    <button class="btn" onclick="selectProduct(1)">Return This Item</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">Product Image</div>
+                <div class="product-info">
+                    <div class="product-title">Samsung 65" QLED 4K Smart TV</div>
+                    <div class="product-details">
+                        Order #: WM-2024-789124<br>
+                        Purchased: March 12, 2024<br>
+                        Quantity: 1
+                    </div>
+                    <div class="price">$1,299.00</div>
+                </div>
+                <div>
+                    <button class="btn" onclick="selectProduct(2)">Return This Item</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">Product Image</div>
+                <div class="product-info">
+                    <div class="product-title">Nike Air Max 270 - Size 10</div>
+                    <div class="product-details">
+                        Order #: WM-2024-789125<br>
+                        Purchased: March 10, 2024<br>
+                        Quantity: 1
+                    </div>
+                    <div class="price">$150.00</div>
+                </div>
+                <div>
+                    <button class="btn" onclick="selectProduct(3)">Return This Item</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- Page 2: Return Reason 
+        <div class="page" id="page2">
+            <h1>Why are you returning this item?</h1>
+            <p>Help us improve by telling us why you're returning this product:</p>
+
+            <div class="reason-grid">
+                <div class="reason-card" onclick="selectReason('defective')">
+                    <div class="reason-icon">🔧</div>
+                    <h3>Defective/Damaged</h3>
+                    <p>Item arrived broken or doesn't work properly</p>
+                </div>
+                <div class="reason-card" onclick="selectReason('wrong-item')">
+                    <div class="reason-icon">📦</div>
+                    <h3>Wrong Item</h3>
+                    <p>Received different product than ordered</p>
+                </div>
+                <div class="reason-card" onclick="selectReason('size-fit')">
+                    <div class="reason-icon">📏</div>
+                    <h3>Size/Fit Issue</h3>
+                    <p>Item doesn't fit as expected</p>
+                </div>
+                <div class="reason-card" onclick="selectReason('not-needed')">
+                    <div class="reason-icon">💭</div>
+                    <h3>No Longer Needed</h3>
+                    <p>Changed mind or found alternative</p>
+                </div>
+                <div class="reason-card" onclick="selectReason('quality')">
+                    <div class="reason-icon">⭐</div>
+                    <h3>Quality Issues</h3>
+                    <p>Product quality below expectations</p>
+                </div>
+                <div class="reason-card" onclick="selectReason('other')">
+                    <div class="reason-icon">❓</div>
+                    <h3>Other</h3>
+                    <p>Different reason not listed above</p>
+                </div>
+            </div>
+
+            <div>
+                <label for="comments"><strong>Additional Comments (Optional):</strong></label>
+                <textarea id="comments" class="textarea" rows="4" placeholder="Please provide any additional details about your return..."></textarea>
+            </div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" onclick="goToPage(1)">← Back</button>
+                <button class="btn" onclick="goToPage(3)" id="continueBtn" disabled>Continue →</button>
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- Page 3: Return/Refund Options -
+        <div class="page" id="page3">
+            <h1>Choose Your Return Option</h1>
+            <p>Select how you'd like to handle your return:</p>
+
+            <div class="savings-alert">
+                💡 <strong>Save Money:</strong> Consider exchange or store credit for faster processing and potential savings!
+            </div>
+
+            <div class="refund-options">
+                <div class="refund-card" onclick="selectRefundOption('exchange')">
+                    <div class="refund-icon">🔄</div>
+                    <h3>Exchange for Different Item</h3>
+                    <p><strong>Fastest Option</strong></p>
+                    <p>Get a replacement or different product immediately</p>
+                    <div style="color: #28a745; font-weight: bold; margin-top: 1rem;">
+                        ✓ No restocking fee<br>
+                        ✓ Free return shipping
+                    </div>
+                </div>
+
+                <div class="refund-card" onclick="selectRefundOption('store-credit')">
+                    <div class="refund-icon">🎁</div>
+                    <h3>Store Credit</h3>
+                    <p><strong>Best Value - 5% Bonus</strong></p>
+                    <p>Get store credit with extra 5% value added</p>
+                    <div style="color: #28a745; font-weight: bold; margin-top: 1rem;">
+                        ✓ Instant processing<br>
+                        ✓ Extra $49.95 bonus credit
+                    </div>
+                </div>
+
+                <div class="refund-card" onclick="selectRefundOption('refund')">
+                    <div class="refund-icon">💳</div>
+                    <h3>Full Refund</h3>
+                    <p><strong>Money Back</strong></p>
+                    <p>Full refund to original payment method</p>
+                    <div style="color: #666; margin-top: 1rem;">
+                        • 3-5 business days processing<br>
+                        • Return shipping required
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" onclick="goToPage(2)">← Back</button>
+                <button class="btn" onclick="goToPage(4)" id="processBtn" disabled>Process Return →</button>
+            </div>
+        </div>
+
+        <!-- Page
+         
+        
+        4: Success Confirmation -
+        <div class="page" id="page4">
+            <div class="success-animation">
+                <div class="checkmark">
+                    <span style="color: white; font-size: 2rem;">✓</span>
+                </div>
+                <h1>Return Successfully Processed!</h1>
+                <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem;">
+                    Your return has been approved and is being processed.
+                </p>
+
+                <div style="background: #f8f9fa; padding: 2rem; border-radius: 12px; margin: 2rem 0; text-align: left;">
+                    <h3 style="color: #0071ce; margin-bottom: 1rem;">Return Details:</h3>
+                    <p><strong>Return ID:</strong> RET-2024-456789</p>
+                    <p><strong>Item:</strong> <span id="returnedItem">Selected Product</span></p>
+                    <p><strong>Return Method:</strong> <span id="returnMethod">Selected Option</span></p>
+                    <p><strong>Expected Processing:</strong> 2-3 business days</p>
+                    <p><strong>Tracking:</strong> We'll email you tracking information shortly</p>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 1.5rem; border-radius: 12px; margin: 2rem 0;">
+                    <h3>🎉 You Saved Money!</h3>
+                    <p>By choosing our optimized return process, you saved on fees and got faster processing!</p>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <button class="btn btn-success" onclick="startNewReturn()">Return Another Item</button>
+                    <button class="btn btn-secondary" onclick="goHome()">Back to Orders</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        let selectedProduct = '';
+        let selectedReason = '';
+        let selectedRefundOption = '';
+
+        function goToPage(pageNum) {
+            // Hide current page
+            document.querySelector('.page.active').classList.remove('active');
+            
+            // Show new page
+            document.getElementById('page' + pageNum).classList.add('active');
+            
+            // Update progress
+            updateProgress(pageNum);
+            currentPage = pageNum;
+        }
+
+        function updateProgress(pageNum) {
+            for (let i = 1; i <= 4; i++) {
+                const step = document.getElementById('step' + i);
+                step.classList.remove('active', 'completed');
+                
+                if (i < pageNum) {
+                    step.classList.add('completed');
+                } else if (i === pageNum) {
+                    step.classList.add('active');
+                }
+            }
+        }
+
+        function selectProduct(productId) {
+            const products = [
+                'Apple iPhone 15 Pro - 128GB Natural Titanium',
+                'Samsung 65" QLED 4K Smart TV',
+                'Nike Air Max 270 - Size 10'
+            ];
+            selectedProduct = products[productId - 1];
+            goToPage(2);
+        }
+
+        function selectReason(reason) {
+            // Remove previous selection
+            document.querySelectorAll('.reason-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selection to clicked card
+            event.currentTarget.classList.add('selected');
+            selectedReason = reason;
+            
+            // Enable continue button
+            document.getElementById('continueBtn').disabled = false;
+        }
+
+        function selectRefundOption(option) {
+            // Remove previous selection
+            document.querySelectorAll('.refund-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selection to clicked card
+            event.currentTarget.classList.add('selected');
+            selectedRefundOption = option;
+            
+            // Enable process button
+            document.getElementById('processBtn').disabled = false;
+        }
+
+        function startNewReturn() {
+            // Reset all selections
+            selectedProduct = '';
+            selectedReason = '';
+            selectedRefundOption = '';
+            
+            // Reset form elements
+            document.querySelectorAll('.reason-card, .refund-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            document.getElementById('comments').value = '';
+            document.getElementById('continueBtn').disabled = true;
+            document.getElementById('processBtn').disabled = true;
+            
+            // Go back to first page
+            goToPage(1);
+        }
+
+        function goHome() {
+            alert('Redirecting to your orders page...');
+        }
+
+
+
+        // Update final page with selected options
+
+        function updateFinalPage() {
+            document.getElementById('returnedItem').textContent = selectedProduct;
+            
+            const methods = {
+                'exchange': 'Exchange for Different Item',
+                'store-credit': 'Store Credit (+5% Bonus)',
+                'refund': 'Full Refund'
+            };
+            document.getElementById('returnMethod').textContent = methods[selectedRefundOption];
+        }
+
+        // Override goToPage for page 4 to update details
+        const originalGoToPage = goToPage;
+        goToPage = function(pageNum) {
+            if (pageNum === 4) {
+                updateFinalPage();
+            }
+            originalGoToPage(pageNum);
+        };
+    </script>
+</body>
+</html>
+ -->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Walmart Returns - Optimize Your Return</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .header {
+            background: #0071ce;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1, h2 {
+            color: #0071ce;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-card {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            background: #fafafa;
+        }
+
+        .product-image {
+            width: 120px;
+            height: 120px;
+            background: #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-details {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #0071ce;
+        }
+
+        .btn {
+            background: #0071ce;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+
+        .btn:hover {
+            background: #005bb5;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #666;
+        }
+
+        .btn-secondary:hover {
+            background: #555;
+        }
+
+        .btn-success {
+            background: #28a745;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .reason-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .reason-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .reason-card:hover {
+            border-color: #0071ce;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,113,206,0.1);
+        }
+
+        .reason-card.selected {
+            border-color: #0071ce;
+            background: #f0f8ff;
+        }
+
+        .reason-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            resize: vertical;
+            font-family: inherit;
+            margin: 1rem 0;
+        }
+
+        .refund-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .refund-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .refund-card:hover {
+            border-color: #0071ce;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,113,206,0.15);
+        }
+
+        .refund-card.selected {
+            border-color: #0071ce;
+            background: linear-gradient(135deg, #f0f8ff, #e6f2ff);
+        }
+
+        .refund-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #0071ce;
+        }
+
+        .success-animation {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #28a745;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounce 0.6s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .progress-step::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: #e0e0e0;
+            z-index: -1;
+        }
+
+        .progress-step:last-child::after {
+            display: none;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-circle.active {
+            background: #0071ce;
+            color: white;
+        }
+
+        .step-circle.completed {
+            background: #28a745;
+            color: white;
+        }
+
+        .step-label {
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .savings-alert {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            .product-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .refund-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Walmart</div>
+        <div>Returns & Refunds</div>
+    </div>
+
+    <div class="container">
+        <!-- hidden input to store price -->
+        <input type="hidden" id="selectedPrice" value="">
+        <div class="page active" id="page1">
+            <h1>Return Items</h1>
+            <p>Select the items you'd like to return from your recent orders:</p>
+
+            <div class="product-card">
+                <div class="product-image">Product Image</div>
+                <div class="product-info">
+                    <div class="product-title">Apple iPhone 15 Pro - 128GB Natural Titanium</div>
+                    <div class="product-details">
+                        Order #: WM-2024-789123<br>
+                        Purchased: March 15, 2024<br>
+                        Quantity: 1
+                    </div>
+                    <div class="price">$999.00</div>
+                </div>
+                <div>
+                    <button class="btn" onclick="selectProduct(1)">Return This Item</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">Product Image</div>
+                <div class="product-info">
+                    <div class="product-title">Samsung 65" QLED 4K Smart TV</div>
+                    <div class="product-details">
+                        Order #: WM-2024-789124<br>
+                        Purchased: March 12, 2024<br>
+                        Quantity: 1
+                    </div>
+                    <div class="price">$1,299.00</div>
+                </div>
+                <div>
+                    <button class="btn" onclick="selectProduct(2)">Return This Item</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">Product Image</div>
+                <div class="product-info">
+                    <div class="product-title">Nike Air Max 270 - Size 10</div>
+                    <div class="product-details">
+                        Order #: WM-2024-789125<br>
+                        Purchased: March 10, 2024<br>
+                        Quantity: 1
+                    </div>
+                    <div class="price">$150.00</div>
+                </div>
+                <div>
+                    <button class="btn" onclick="selectProduct(3)">Return This Item</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- Page 2: Return Reason -->
+        <div class="page" id="page2">
+            <h1>Why are you returning this item?</h1>
+            <p>Help us improve by telling us why you're returning this product:</p>
+
+            <div class="reason-grid">
+                <div class="reason-card" onclick="selectReason('defective')">
+                    <div class="reason-icon">🔧</div>
+                    <h3>Defective/Damaged</h3>
+                    <p>Item arrived broken or doesn't work properly</p>
+                </div>
+                <div class="reason-card" onclick="selectReason('wrong-item')">
+                    <div class="reason-icon">📦</div>
+                    <h3>Wrong Item</h3>
+                    <p>Received different product than ordered</p>
+                </div>
+                <div class="reason-card" onclick="selectReason('size-fit')">
+                    <div class="reason-icon">📏</div>
+                    <h3>Size/Fit Issue</h3>
+                    <p>Item doesn't fit as expected</p>
+                </div>
+                <div class="reason-card" onclick="selectReason('not-needed')">
+                    <div class="reason-icon">💭</div>
+                    <h3>No Longer Needed</h3>
+                    <p>Changed mind or found alternative</p>
+                </div>
+                <div class="reason-card" onclick="selectReason('quality')">
+                    <div class="reason-icon">⭐</div>
+                    <h3>Quality Issues</h3>
+                    <p>Product quality below expectations</p>
+                </div>
+                <div class="reason-card" onclick="selectReason('other')">
+                    <div class="reason-icon">❓</div>
+                    <h3>Other</h3>
+                    <p>Different reason not listed above</p>
+                </div>
+            </div>
+
+            <div>
+                <label for="comments"><strong>Additional Comments (Optional):</strong></label>
+                <textarea id="comments" class="textarea" rows="4" placeholder="Please provide any additional details about your return..."></textarea>
+            </div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" onclick="goToPage(1)">← Back</button>
+                <button class="btn" onclick="goToPage(3)" id="continueBtn" disabled>Continue →</button>
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- Page 3: Return/Refund Options -->
+        <div class="page" id="page3">
+            <h1>Choose Your Return Option</h1>
+            <p>Select how you'd like to handle your return:</p>
+
+            <div class="savings-alert">
+                💡 <strong>Save Money:</strong> Consider exchange or store credit for faster processing and potential savings!
+            </div>
+
+            <div class="refund-options">
+                <div class="refund-card" onclick="selectRefundOption('exchange')">
+                    <div class="refund-icon">🔄</div>
+                    <h3>Exchange for Different Item</h3>
+                    <p><strong>Fastest Option</strong></p>
+                    <p>Get a replacement or different product immediately</p>
+                    <div style="color: #28a745; font-weight: bold; margin-top: 1rem;">
+                        ✓ No restocking fee<br>
+                        ✓ Free return shipping
+                    </div>
+                </div>
+
+                <div class="refund-card" onclick="selectRefundOption('store-credit')">
+                    <div class="refund-icon">🎁</div>
+                    <h3>Store Credit</h3>
+                    <p><strong>Best Value - 5% Bonus</strong></p>
+                    <p>Get store credit with extra 5% value added</p>
+                    <div style="color: #28a745; font-weight: bold; margin-top: 1rem;">
+                        ✓ Instant processing<br>
+                        ✓ Extra $49.95 bonus credit
+                    </div>
+                </div>
+
+                <div class="refund-card" onclick="selectRefundOption('refund')">
+                    <div class="refund-icon">💳</div>
+                    <h3>Full Refund</h3>
+                    <p><strong>Money Back</strong></p>
+                    <p>Full refund to original payment method</p>
+                    <div style="color: #666; margin-top: 1rem;">
+                        • 3-5 business days processing<br>
+                        • Return shipping required
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" onclick="goToPage(2)">← Back</button>
+                <button class="btn" onclick="goToPage(4)" id="processBtn" disabled>Process Return →</button>
+            </div>
+        </div>
+
+        <!-- Page
+         
+        
+        4: Success Confirmation -->
+        <div class="page" id="page4">
+            <div class="success-animation">
+                <div class="checkmark">
+                    <span style="color: white; font-size: 2rem;">✓</span>
+                </div>
+                <h1>Return Successfully Processed!</h1>
+                <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem;">
+                    Your return has been approved and is being processed.
+                </p>
+
+                <div style="background: #f8f9fa; padding: 2rem; border-radius: 12px; margin: 2rem 0; text-align: left;">
+                    <h3 style="color: #0071ce; margin-bottom: 1rem;">Return Details:</h3>
+                    <p><strong>Return ID:</strong> RET-2024-456789</p>
+                    <p><strong>Item:</strong> <span id="returnedItem">Selected Product</span></p>
+                    <p><strong>Return Method:</strong> <span id="returnMethod">Selected Option</span></p>
+                    <p><strong>Expected Processing:</strong> 2-3 business days</p>
+                    <p><strong>Tracking:</strong> We'll email you tracking information shortly</p>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 1.5rem; border-radius: 12px; margin: 2rem 0;">
+                    <h3>🎉 You Saved Money!</h3>
+                    <p>By choosing our optimized return process, you saved on fees and got faster processing!</p>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <button class="btn btn-success" onclick="startNewReturn()">Return Another Item</button>
+                    <button class="btn btn-secondary" onclick="goHome()">Back to Orders</button>
+                </div>
+            </div>
+        </div>
+    </div>>
+
+    </div>
+
+    <script>
+        let currentPage = 1;
+        let selectedProduct = '';
+        let selectedReason = '';
+        let selectedRefundOption = '';
+
+        function goToPage(pageNum) {
+            document.querySelector('.page.active').classList.remove('active');
+            document.getElementById('page' + pageNum).classList.add('active');
+            updateProgress(pageNum);
+            currentPage = pageNum;
+        }
+
+        function updateProgress(pageNum) {
+            for (let i = 1; i <= 4; i++) {
+                const step = document.getElementById('step' + i);
+                step.classList.remove('active', 'completed');
+                if (i < pageNum) {
+                    step.classList.add('completed');
+                } else if (i === pageNum) {
+                    step.classList.add('active');
+                }
+            }
+        }
+
+        function selectProduct(productId) {
+            const products = [
+                { title: 'Apple iPhone 15 Pro - 128GB Natural Titanium', price: 999 },
+                { title: 'Samsung 65" QLED 4K Smart TV', price: 1299 },
+                { title: 'Nike Air Max 270 - Size 10', price: 150 }
+            ];
+            selectedProduct = products[productId - 1].title;
+            document.getElementById('selectedPrice').value = products[productId - 1].price;
+            goToPage(2);
+        }
+
+        function selectReason(reason) {
+            document.querySelectorAll('.reason-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            selectedReason = reason;
+            document.getElementById('continueBtn').disabled = false;
+        }
+
+        function selectRefundOption(option) {
+            document.querySelectorAll('.refund-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            selectedRefundOption = option;
+            document.getElementById('processBtn').disabled = false;
+        }
+
+        function startNewReturn() {
+            selectedProduct = '';
+            selectedReason = '';
+            selectedRefundOption = '';
+            document.querySelectorAll('.reason-card, .refund-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.getElementById('comments').value = '';
+            document.getElementById('continueBtn').disabled = true;
+            document.getElementById('processBtn').disabled = true;
+            goToPage(1);
+        }
+
+        function goHome() {
+            alert('Redirecting to your orders page...');
+        }
+
+        function updateFinalPage() {
+            document.getElementById('returnedItem').textContent = selectedProduct;
+            const methods = {
+                'exchange': 'Exchange for Different Item',
+                'store-credit': 'Store Credit (+5% Bonus)',
+                'refund': 'Full Refund'
+            };
+            document.getElementById('returnMethod').textContent = methods[selectedRefundOption];
+        }
+
+        // override goToPage for page 4
+        const originalGoToPage = goToPage;
+        goToPage = function(pageNum) {
+            if (pageNum === 4) {
+                updateFinalPage();
+                sendPredictionRequest();
+            }
+            originalGoToPage(pageNum);
+        };
+
+        function sendPredictionRequest() {
+            const payload = {
+                product: selectedProduct,
+                price: Number(document.getElementById('selectedPrice').value),
+                reason: selectedReason,
+                comments: document.getElementById('comments').value,
+                refund_option: selectedRefundOption
+            };
+
+            console.log("Sending payload:", payload);
+
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Prediction result:", data);
+                showPredictionResult(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while predicting.');
+            });
+        }
+
+        function showPredictionResult(data) {
+            const resultHTML = `
+                <h3>ML Prediction</h3>
+                <p><strong>Predicted Refurb Cost:</strong> ₹${data.predicted_refurb_cost}</p>
+                <p><strong>Predicted Resale Value:</strong> ₹${data.predicted_resale_value}</p>
+                <p><strong>Refurb Ratio:</strong> ${data.refurb_ratio}</p>
+                <p><strong>Resale Ratio:</strong> ${data.resale_ratio}</p>
+                <p><strong>Profit:</strong> ₹${data.profit}</p>
+                <p><strong>Recommended Decision:</strong> ${data.recommended_decision}</p>
+            `;
+            document.getElementById('page4').insertAdjacentHTML('beforeend', resultHTML);
+        }
+    </script>
+</body>
+</html>

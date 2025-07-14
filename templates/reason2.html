@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Walmart Returns - Return Reason</title>
+  <style>
+    /* -- styles trimmed for brevity -- */
+    /* Keep all your original styles here */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+    }
+
+    .header {
+      background: #0071ce;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+
+    h1 {
+      color: #0071ce;
+      margin-bottom: 1.5rem;
+    }
+
+    .reason-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .reason-card {
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1rem;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .reason-card:hover {
+      border-color: #0071ce;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 15px rgba(0,113,206,0.1);
+    }
+
+    .reason-card.selected {
+      border-color: #0071ce;
+      background: #f0f8ff;
+    }
+
+    .textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      resize: vertical;
+      font-family: inherit;
+      margin: 1rem 0;
+    }
+
+    .btn {
+      background: #0071ce;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .btn:hover {
+      background: #005bb5;
+      transform: translateY(-2px);
+    }
+
+    .product-summary {
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      border-left: 4px solid #0071ce;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">Walmart</div>
+    <div>Returns & Refunds</div>
+  </div>
+
+  <div class="container">
+    <div class="product-summary">
+      <strong>Returning:</strong> {{ data.product }}<br>
+      <strong>Price:</strong> Rs {{ data.price }}
+    </div>
+
+    <h1>Why are you returning this item?</h1>
+    <p>Help us improve by telling us why you're returning this product:</p>
+
+    <form method="POST">
+      <input type="hidden" name="product" value="{{ product }}">
+      <input type="hidden" name="price" value="{{ price }}">
+
+      <input type="hidden" name="reason" id="reasonField" required>
+
+      <div class="reason-grid">
+        <div class="reason-card" onclick="selectReason('defective')">
+          <div class="reason-icon">🔧</div>
+          <h3>Defective/Damaged</h3>
+          <p>Item arrived broken or doesn't work properly</p>
+        </div>
+        <div class="reason-card" onclick="selectReason('wrong-item')">
+          <div class="reason-icon">📦</div>
+          <h3>Wrong Item</h3>
+          <p>Received different product than ordered</p>
+        </div>
+        <div class="reason-card" onclick="selectReason('size-fit')">
+          <div class="reason-icon">📏</div>
+          <h3>Size/Fit Issue</h3>
+          <p>Item doesn't fit as expected</p>
+        </div>
+        <div class="reason-card" onclick="selectReason('not-needed')">
+          <div class="reason-icon">💭</div>
+          <h3>No Longer Needed</h3>
+          <p>Changed mind or found alternative</p>
+        </div>
+        <div class="reason-card" onclick="selectReason('quality')">
+          <div class="reason-icon">⭐</div>
+          <h3>Quality Issues</h3>
+          <p>Product quality below expectations</p>
+        </div>
+        <div class="reason-card" onclick="selectReason('other')">
+          <div class="reason-icon">❓</div>
+          <h3>Other</h3>
+          <p>Different reason not listed above</p>
+        </div>
+      </div>
+
+      <label for="comments"><strong>Additional Comments (Optional):</strong></label>
+      <textarea name="comments" id="comments" class="textarea" rows="4" placeholder="Any additional details..."></textarea>
+
+      <label for="condition"><strong>Item Condition (1-10):</strong></label>
+      <select name="condition" id="condition" required style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+        <option value="">Select condition...</option>
+        <option value="1">1 - Severely Damaged</option>
+        <option value="2">2 - Very Damaged</option>
+        <option value="3">3 - Damaged</option>
+        <option value="4">4 - Poor Condition</option>
+        <option value="5">5 - Fair Condition</option>
+        <option value="6">6 - Good Condition</option>
+        <option value="7">7 - Very Good</option>
+        <option value="8">8 - Excellent</option>
+        <option value="9">9 - Like New</option>
+        <option value="10">10 - Perfect/Unopened</option>
+      </select>
+
+      <button type="submit" class="btn" id="continueBtn" disabled>Continue →</button>
+    </form>
+  </div>
+
+  <script>
+    function selectReason(reason) {
+      // Clear all cards
+      document.querySelectorAll('.reason-card').forEach(card => {
+        card.classList.remove('selected');
+      });
+
+      // Highlight selected card
+      const selectedCard = document.querySelector(`.reason-card[onclick*="${reason}"]`);
+      if (selectedCard) {
+        selectedCard.classList.add('selected');
+      }
+
+      // Fill hidden input
+      document.getElementById('reasonField').value = reason;
+
+      // Enable continue button
+      document.getElementById('continueBtn').disabled = false;
+    }
+  </script>
+</body>
+</html>

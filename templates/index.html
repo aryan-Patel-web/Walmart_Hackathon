@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Return-Right Scorer</title>
+</head>
+<body>
+  <h2>Return-Right Prediction</h2>
+  
+  <form method="POST">
+    <label>Resale Value:</label>
+    <input type="number" name="resale_value" step="0.01" required><br><br>
+    
+    <label>Price:</label>
+    <input type="number" name="price" step="0.01" required><br><br>
+    
+    <input type="submit" value="Predict">
+  </form>
+  
+  {% if prediction %}
+  
+    <h3>Prediction: {{ prediction }}</h3>
+
+  {% endif %}
+</body>
+</html>

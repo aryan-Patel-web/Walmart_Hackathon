@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Walmart Returns - Select Items</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+    }
+    .header {
+      background: #0071ce;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+    h1 {
+      color: #0071ce;
+      margin-bottom: 1.5rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    label {
+      font-weight: bold;
+    }
+    select, input {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    .btn {
+      background: #0071ce;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      width: fit-content;
+    }
+    .btn:hover {
+      background: #005bb5;
+      transform: translateY(-2px);
+    }
+    .progress-bar {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      padding: 0 1rem;
+    }
+    .progress-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      position: relative;
+    }
+    .progress-step::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background: #e0e0e0;
+      z-index: -1;
+    }
+    .progress-step:last-child::after {
+      display: none;
+    }
+    .step-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #0071ce;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .step-circle.inactive {
+      background: #e0e0e0;
+      color: #666;
+    }
+    .step-label {
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">Walmart</div>
+    <div>Returns & Refunds</div>
+  </div>
+
+  <div class="container">
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+      <div class="progress-step">
+        <div class="step-circle">1</div>
+        <div class="step-label">Select Item</div>
+      </div>
+      <div class="progress-step">
+        <div class="step-circle inactive">2</div>
+        <div class="step-label">Return Reason</div>
+      </div>
+      <div class="progress-step">
+        <div class="step-circle inactive">3</div>
+        <div class="step-label">Choose Option</div>
+      </div>
+      <div class="progress-step">
+        <div class="step-circle inactive">4</div>
+        <div class="step-label">Confirmation</div>
+      </div>
+      <div class="progress-step">
+        <div class="step-circle inactive">5</div>
+        <div class="step-label">Dashboard</div>
+      </div>
+    </div>
+
+    <h1>Return Items</h1>
+    <p>Select the item you'd like to return from your recent orders:</p>
+
+<form method="POST" >
+  <label for="product">Select Product</label>
+  <select name="product" id="product" required>
+    <option value="">-- Choose a product --</option>
+    <option value="Footwear">Footwear</option>
+    <!-- <option value="Electrical and Electronics">Electrical and Electronics</option> -->
+    <option value="Beauty Product">Beauty Product</option>
+    <option value="Kitchen Tools">Kitchen Tools</option>
+    <option value="Fashion and Clothing">Fashion and Clothing</option>
+    <option value="Outdoor Equipment">Outdoor Equipment</option>
+  </select>
+
+  <label for="price">Original Price (Rs)</label>
+  <input type="number" name="price" id="price" placeholder="Original Price" step="0.01" required />
+
+  <button type="submit" class="btn">Next</button>
+</form>
+
+  </div>
+</body>
+</html>

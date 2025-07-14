@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walmart - Save Money. Live Better.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f8f8;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #0071ce;
+            color: white;
+            padding: 12px 0;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ffc220;
+        }
+
+        .location {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 50px 12px 16px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ffc220;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .account-cart {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cart {
+            position: relative;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ffc220;
+            color: #000;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Navigation */
+        .nav {
+            background-color: white;
+            border-bottom: 1px solid #e6e6e6;
+            padding: 0 20px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding: 12px 0;
+        }
+
+        .nav-item {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .nav-item:hover {
+            border-bottom-color: #0071ce;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 20px;
+        }
+
+        /* Promotional Cards */
+        .promo-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .promo-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .jurassic-card {
+            background: linear-gradient(135deg, #a8e6cf, #7fcdcd);
+            padding: 30px;
+            color: #333;
+        }
+
+        .jurassic-card h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .shop-btn {
+            background: white;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        .shop-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .july4-card {
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .july4-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20px;
+            width: 200px;
+            height: 200px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .july4-card h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .july4-card h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .express-delivery {
+            background: #ffc220;
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .stockx-card {
+            background: linear-gradient(135deg, #2d5a27, #4a7c59);
+            color: white;
+            padding: 30px;
+            position: relative;
+        }
+
+        .stockx-card h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .stockx-logo {
+            position: absolute;
+            bottom: 20px;
+            left: 30px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .beauty-card {
+            background: linear-gradient(135deg, #f4e4bc, #e8d5b7);
+            padding: 30px;
+            color: #333;
+        }
+
+        .beauty-card h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .deals-card {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            padding: 30px;
+            color: #333;
+        }
+
+        .deals-card h2 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .roche-card {
+            background: linear-gradient(135deg, #ffecd1, #fcb69f);
+            padding: 30px;
+            color: #333;
+        }
+
+        .victoria-card {
+            background: linear-gradient(135deg, #ffeef8, #f8d7da);
+            padding: 30px;
+            color: #333;
+        }
+
+        .home-trends-card {
+            background: linear-gradient(135deg, #e8f5e8, #d4edda);
+            padding: 30px;
+            color: #333;
+        }
+
+        /* Grid Layout Adjustments */
+        .left-column, .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .center-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .bottom-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        /* Product Images Placeholders */
+        .product-placeholder {
+            width: 100%;
+            height: 120px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(0,0,0,0.5);
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-container {
+                margin: 0;
+                max-width: 100%;
+            }
+
+            .nav-container {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .july4-card h1 {
+                font-size: 36px;
+            }
+
+            .july4-card h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">★ Walmart</div>
+            <div class="location">
+                <span>📍 Pickup or delivery?<br> Barra bypass , Kanpur</span>
+            </div>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search everything at Walmart online and in store">
+                <button class="search-btn">🔍</button>
+            </div>
+            <div class="account-cart">
+                <div>
+                 <button onclick="window.location.href='/detail'" class="btn">
+                 Orders
+                </button>
+
+                    <div style="font-size: 12px;">My Items</div>
+                </div>
+                <div>
+                    <!-- <div style="border-radius: 50%; height:14px width:14px  background-color:red">Aryan  </div> -->
+                     <div style="
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  color: white;
+  font-size: 8px;
+  font-weight: bold;
+  border-radius: 50%;
+">
+  Aryan
+</div>
+
+                    <!-- <div style="font-size: 12px;">Account</div> -->
+                </div>
+                <button class="cart">
+                    🛒
+                    <span class="cart-count">2</span>
+                </button>
+                <div style="font-size: 18px; font-weight: bold;">$0.00</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="nav-item">🏪 Departments</a>
+            <a href="#" class="nav-item">🛠️ Services</a>
+            <a href="#" class="nav-item">Get it Fast</a>
+            <a href="#" class="nav-item">New Arrivals</a>
+            <a href="#" class="nav-item">4th of July</a>
+            <a href="#" class="nav-item">Dinner Made Easy</a>
+            <a href="#" class="nav-item">Pharmacy Delivery</a>
+            <a href="#" class="nav-item">Trending</a>
+            <a href="#" class="nav-item">Swim Shop</a>
+            <a href="#" class="nav-item">My Items</a>
+            <a href="#" class="nav-item">Auto Service</a>
+            <a href="#" class="nav-item">Only at Walmart</a>
+            <a href="#" class="nav-item">Registry</a>
+            <a href="#" class="nav-item">Walmart+</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Left Column -->
+        <div class="left-column">
+            <div class="promo-card jurassic-card">
+                <h2>New Jurassic World movie</h2>
+                <button class="shop-btn">Shop toys & more</button>
+                <div class="product-placeholder">🦕 Dinosaur Toys</div>
+            </div>
+
+            <div class="promo-card stockx-card">
+                <h2>Hot new arrivals</h2>
+                <button class="shop-btn">Shop now</button>
+                <div class="product-placeholder">👟 Sneakers Collection</div>
+                <div class="stockx-logo">StockX</div>
+            </div>
+        </div>
+
+        <!-- Center Column -->
+        <div class="center-column">
+            <div class="promo-card july4-card">
+                <div style="font-size: 18px; margin-bottom: 10px;">Get it in as fast as an hour*</div>
+                <h1>July 4th faves</h1>
+                <h2>from $1.98</h2>
+                <button class="shop-btn">Shop now</button>
+                <div class="express-delivery">
+                    ⚡ Express Delivery
+                </div>
+                <div class="product-placeholder" style="background: rgba(255,255,255,0.3); margin-top: 20px;">🧊 Cooler & BBQ Items</div>
+            </div>
+
+            <div class="bottom-row">
+                <div class="promo-card beauty-card">
+                    <h2>Hot, new beauty from $10</h2>
+                    <button class="shop-btn">Shop now</button>
+                    <div class="product-placeholder">💄 Beauty Products</div>
+                    <div style="background: #4a90e2; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; display: inline-block; margin-top: 10px;">New Arrivals</div>
+                </div>
+
+                <div class="promo-card deals-card">
+                    <h2>Up to 50% off</h2>
+                    <button class="shop-btn">Shop now</button>
+                    <div class="product-placeholder">🪑 Home & Garden</div>
+                    <div style="background: #0071ce; color: white; padding: 8px 16px; border-radius: 20px; font-size: 18px; font-weight: bold; display: inline-block; margin-top: 10px;">Flash Deals</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-column">
+            <div class="promo-card roche-card">
+                <h2>Save on La Roche-Posay Anthelios</h2>
+                <button class="shop-btn">Shop now</button>
+                <div class="product-placeholder">🧴 Sunscreen Products</div>
+            </div>
+
+            <div class="promo-card victoria-card">
+                <h2>Premium beauty. Victoria's Secret.</h2>
+                <button class="shop-btn">Shop now</button>
+                <div class="product-placeholder">💐 Perfume Collection</div>
+            </div>
+
+            <div class="promo-card home-trends-card">
+                <h2>Summer home trends</h2>
+                <button class="shop-btn">Shop home</button>
+                <div class="product-placeholder">🏠 Home Decor</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Add some interactivity
+        document.querySelectorAll('.promo-card').forEach(card => {
+            card.addEventListener('click', function() {
+                console.log('Card clicked:', this.querySelector('h2').textContent);
+            });
+        });
+
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-input').value;
+            if (searchTerm) {
+                alert('Searching for: ' + searchTerm);
+            }
+        });
+
+        document.querySelector('.cart').addEventListener('click', function() {
+            alert('Cart is empty. Add some items to get started!');
+        });
+
+        // Simulate cart count update
+        let cartCount = 0;
+        document.querySelectorAll('.shop-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                cartCount++;
+                document.querySelector('.cart-count').textContent = cartCount;
+                document.querySelector('.cart').nextElementSibling.textContent = '$' + (cartCount * 19.99).toFixed(2);
+            });
+        });
+    </script>
+
+</body>
+</html>

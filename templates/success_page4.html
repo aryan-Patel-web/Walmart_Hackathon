@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Return Success</title>
+  <style>
+    /* Your entire CSS remains unchanged */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+    }
+
+    .header {
+      background: #0071ce;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .success-animation {
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .checkmark {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #28a745;
+      margin: 0 auto 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: bounce 0.6s ease-in-out;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+    .btn {
+      background: #0071ce;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin: 0.5rem;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background: #005bb5;
+      transform: translateY(-2px);
+    }
+
+    .btn-success {
+      background: #28a745;
+    }
+
+    .btn-success:hover {
+      background: #218838;
+    }
+
+    .btn-secondary {
+      background: #666;
+    }
+
+    .btn-secondary:hover {
+      background: #555;
+    }
+
+    .details-card {
+      background: #f8f9fa;
+      padding: 2rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    .waiting-banner {
+      background: #fff3cd;
+      color: #856404;
+      border-left: 4px solid #ffc107;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .success-banner {
+      background: linear-gradient(135deg, #28a745, #20c997);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .testing-link {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .testing-link a {
+      color: #0071ce;
+      text-decoration: underline;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .testing-link a:hover {
+      color: #005bb5;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">Walmart</div>
+    <div>Returns & Refunds</div>
+  </div>
+
+  <div class="container">
+    <div class="success-animation">
+      <div class="checkmark">
+        <span style="color: white; font-size: 2rem;">✓</span>
+      </div>
+      <h1>Return Successfully Processed!</h1>
+      <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem;">
+        Your return has been submitted and is currently awaiting review.
+      </p>
+
+      <div class="details-card">
+        <h3 style="color: #0071ce; margin-bottom: 1rem;">Return Details:</h3>
+        <p><strong>Return ID:</strong> RET-2024-456789</p>
+        <p><strong>Item:</strong> {{ data.product }}</p>
+        <p><strong>Price:</strong> Rs {{ data.price }}</p>
+        <p><strong>Return Method:</strong> {{ data.refund_option }}</p>
+        <p><strong>Return Reason:</strong> {{ data.reason }}</p>
+        <p><strong>Expected Processing:</strong> 2-3 business days</p>
+        <p><strong>Tracking:</strong> We'll email you tracking information shortly.</p>
+      </div>
+
+      <div class="waiting-banner">
+        <h3>⏳ Waiting for Walmart Approval</h3>
+        <p>Your return request has been received and will be reviewed by Walmart shortly. You’ll see detailed analysis and recommendations in your dashboard once approved.</p>
+      </div>
+
+      <div class="success-banner">
+        <h3>🎉 Thank You!</h3>
+        <p>Your return has been submitted successfully. We appreciate your business!</p>
+      </div>
+
+      <div style="margin-top: 2rem;">
+        <a href="/" class="btn btn-success">Return Another Item</a>
+        <a href="/dashboard" class="btn btn-secondary">Go to Dashboard</a>
+      </div>
+
+      <!-- FIXED TESTING LINK -->
+      <div class="testing-link">
+        <p>🔗 For testing: <a href="/dashboard">Click here to view the dashboard and run predictions</a></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
